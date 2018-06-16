@@ -4,18 +4,11 @@
 const cards = document.querySelectorAll('.card');
 console.log(cards);
 
-/*for(card of cards) {
-  card.addEventListener('click', () => {
-    console.log("Hello, I'm a card");
+cards.forEach(function(card) {
+  card.addEventListener('click', function(e) {
+    card.classList.add('open');
+    card.classList.add('show');
   });
-}*/
-
-deck.addEventListener('click', event => {
-  const clickTarget = event.target;
-  if (clickTarget.classList.contains('card')) {
-    clickTarget.classList.toggle('open');
-    clickTarget.classList.toggle('show');
-  }
 });
 
 /*
