@@ -1,13 +1,28 @@
 /*
  * Create a list that holds all of your cards
  */
-const cards = document.querySelectorAll('.card');
-console.log(cards);
 
+ // Display all the cards
+const cards = document.querySelectorAll('.card');
+const openCards = []; // keeps a count of how many cards are opened
+
+
+// Detect when a card is clicked
 cards.forEach(function(card) {
   card.addEventListener('click', function(e) {
+    openCards.push(card);
     card.classList.add('open');
     card.classList.add('show');
+    console.log('Open Cards: ', openCards.length); // shows how many cards have been opened
+
+    if (openCards.length == 2) {
+      setTimeout(function() {
+        openCards.forEach(function(card) {
+          card.classList.remove('open');
+          card.classList.remove('show');
+        });
+      }, 1000);
+    }
   });
 });
 
