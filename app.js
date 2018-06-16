@@ -1,25 +1,23 @@
 /*
  * Create a list that holds all of your cards
  */
-const symbols = ["fa fa-diamond", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-paper-plane-o",
-               "fa fa-anchor", "fa fa-anchor", "fa fa-bolt", "fa fa-bolt", "fa fa-cube", "fa fa-cube",
-               "fa fa-leaf", "fa fa-leaf", "fa fa-bicycle", "fa fa-bicycle", "fa fa-bomb", "fa fa-bomb"];
+const cards = document.querySelectorAll('.card');
+console.log(cards);
 
-
-const cardsContainer = document.querySelector(".deck");
-
-// create the cards
-
-for(let i = 0; i < symbols.length; i++) {
-  const card = document.createElement("li");
-  card.classList.add("card");
-  card.innerHTML = `<i class="${symbols[i]}"></i>`;
-  cardsContainer.appendChild(card);
-
-  card.addEventListener("click", function() {
-    console.log(card.innerHTML);
+/*for(card of cards) {
+  card.addEventListener('click', () => {
+    console.log("Hello, I'm a card");
   });
-}
+}*/
+
+deck.addEventListener('click', event => {
+  const clickTarget = event.target;
+  if (clickTarget.classList.contains('card')) {
+    clickTarget.classList.toggle('open');
+    clickTarget.classList.toggle('show');
+  }
+});
+
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -42,38 +40,7 @@ function shuffle(array) {
     return array;
 }
 
-// Timer
-let sec = 0;
-let min = 0;
-let timer;
 
-//insertTime function
-function insertTime() {
-  sec++;
-
-  if (sec < 10) {
-    sec = `0$({sec})`;
-  }
-
-  if (sec >= 60) {
-    min++;
-    sec = "00";
-  }
-
-  // display time
-  document.querySelector('timer-output')innerHTML = "0" + min + ":" + sec;
-}
-
-// startTimer() function used in the timer variable to hold setInterval() function.
-function startTimer() {
-  timer = setInterval(insertTime, 1000);
-}
-
-function stopTimer() {
-  clearInterval(timer);
-  sec = 0;
-  min = 0;
-}
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
