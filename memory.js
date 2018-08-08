@@ -153,10 +153,6 @@ function stopClock() {
 	clearInterval(clockId);
 } 
 
-//Hide Modal
-.hide {
-	display: none;
-} 
 
 //Toggle modal on and off
 function toggleModal() {
@@ -174,7 +170,7 @@ displayTime();
 moves = 16;
 checkScore();
 
-toggleModal();
+toggleModal(); // Open modal
 
 writeModalStats();
 toggleModal();
@@ -218,6 +214,10 @@ function resetGame() {
 	shuffleDeck();
 } 
 
+/*document.querySelector('.restart').addEventListener('click', resetGame);*/
+
+document.querySelector('.button_replay').addEventListener('click', resetGame);
+
 function resetClock {
 	stopClock();
 	clockOff = true;
@@ -255,5 +255,5 @@ function resetCards() {
 		card.className = 'card';
 	}
 }
-document.querySelector('.restart').addEventListener('click', resetGame);
+
 document.querySelector('.button_replay').addEventListener('click', replayGame);

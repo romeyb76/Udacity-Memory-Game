@@ -107,8 +107,13 @@ h1 {
     float: right;
     cursor: pointer;
 } 
+// Hide Modal
 
-.modal {
+.hide {
+	display: none;
+}
+
+.modal_background {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -158,6 +163,3 @@ h1 {
 	height: 30px;
 } 
 
-.hide {
-	display: none;
-}
