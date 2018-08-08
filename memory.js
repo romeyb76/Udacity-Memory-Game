@@ -1,4 +1,4 @@
-const cards = document.querySelectorAll('.card');
+onst cards = document.querySelectorAll('.card');
 console.log(cards);
 let toggledCards = [];
 let moves = 0; 
@@ -154,7 +154,7 @@ function stopClock() {
 } 
 
 
-//Toggle modal on and off
+// Toggle modal on and off
 function toggleModal() {
 	const modal = document.querySelector('.modal_background');
 	modal.classList.toggle('hide');
@@ -170,7 +170,7 @@ displayTime();
 moves = 16;
 checkScore();
 
-toggleModal(); // Open modal
+toggleModal();
 
 writeModalStats();
 toggleModal();
@@ -214,8 +214,7 @@ function resetGame() {
 	shuffleDeck();
 } 
 
-/*document.querySelector('.restart').addEventListener('click', resetGame);*/
-
+document.querySelector('.restart').addEventListener('click', resetGame);
 document.querySelector('.button_replay').addEventListener('click', resetGame);
 
 function resetClock {
@@ -247,7 +246,9 @@ function gameOver() {
 function replayGame() {
 	resetGame();
 	toggleModal();
-}
+} 
+
+document.querySelector('.button_replay').addEventListener('click', replayGame);
 
 function resetCards() {
 	const cards = document.querySelectorAll('.deck li');
@@ -256,4 +257,3 @@ function resetCards() {
 	}
 }
 
-document.querySelector('.button_replay').addEventListener('click', replayGame);
