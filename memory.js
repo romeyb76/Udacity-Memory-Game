@@ -1,4 +1,4 @@
-onst cards = document.querySelectorAll('.card');
+const cards = document.querySelectorAll('.card');
 console.log(cards);
 let toggledCards = [];
 let moves = 0; 
@@ -217,7 +217,7 @@ function resetGame() {
 document.querySelector('.restart').addEventListener('click', resetGame);
 document.querySelector('.button_replay').addEventListener('click', resetGame);
 
-function resetClock {
+function resetClock(){
 	stopClock();
 	clockOff = true;
 	time = 0;
