@@ -143,7 +143,13 @@ startClock();
 function displayTime() {
 	const clock = document.querySelector('.clock');
 	console.log(clock);
-	clock.innerHTML = time;
+	clock.innerHTML = time; 
+	
+	if(seconds < 10) {
+		clock.innerHTML = `${minutes}:0${seconds}`;
+	}else{
+		clock.innerHTML = `${minutes}:${seconds}`;
+	}
 }
 
 const minutes = Math.floor(time / 60);
@@ -203,9 +209,7 @@ document.querySelector('.button_cancel').addEventListener('click', () => {
 	toggleModal();
 });
 
-document.querySelector('.button_replay').addEventListener('click', () => {
-	console.log('replay');
-});
+document.querySelector('.button_replay').addEventListener('click', replayGame);
 
 function resetGame() {
 	resetClock();
