@@ -138,27 +138,27 @@ function startClock() {
 		
 	}, 1000);
 }
-startClock(); 
+startClock();
 
 function displayTime() {
 	const clock = document.querySelector('.clock');
 	console.log(clock);
 	clock.innerHTML = time; 
-	
-	if(seconds < 10) {
-		clock.innerHTML = `${minutes}:0${seconds}`;
-	}else{
-		clock.innerHTML = `${minutes}:${seconds}`;
-	}
 }
 
 const minutes = Math.floor(time / 60);
-const seconds = Math.floor(time % 60);
+const seconds = time % 60;
+
+if(seconds < 10) {
+	clock.innerHTML = `${minutes}:0${seconds}`;
+}else{
+		clock.innerHTML = `${minutes}:${seconds}`;
+}
 
 function stopClock() {
 	clearInterval(clockId);
 } 
-
+stopClock();
 
 // Toggle modal on and off
 function toggleModal() {
