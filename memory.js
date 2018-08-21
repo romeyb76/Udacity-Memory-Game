@@ -9,9 +9,14 @@ let matched = 0;
 const TOTAL_PAIRS = 8;
 
 const deck = document.querySelector('.deck');
+
 deck.addEventListener('click', event => {
 	const clickTarget = event.target;
-	if (clickTarget.classList.contains('card') && toggledCards.length < 2 && !toggledCards.includes(clickTarget)) {
+	if (clickTarget.classList.contains('card') && toggledCards.length < 2 && !toggledCards.includes(clickTarget)) { 
+		if(clockOff) {
+			startClock();
+			clockOff = false;
+		}
 		toggleCard(clickTarget); 
 		addToggleCard(clickTarget);
 		if (toggledCards.length === 2) {
@@ -20,17 +25,8 @@ deck.addEventListener('click', event => {
 			checkScore();
 		}
 	} 
-	if(isClickValid(clickTarget)) {
-		if(clockOff) {
-			startClock();
-			clockOff = false;
-		}
-	}
+	
 }); 
-
-if (matched === TOTAL_PAIRS) {
-	gameOver();
-}
 
 function toggleCard(card) {
 	card.classList.toggle('open');
@@ -39,7 +35,6 @@ function toggleCard(card) {
 
 function addToggleCard(clickTarget) {
 	toggledCards.push(clickTarget);
-	console.log(toggledCards);
 } 
 
 function checkForMatch() {
@@ -47,25 +42,24 @@ function checkForMatch() {
 		toggledCards[1].firstElementChild.className) {
 			toggledCards[0].classList.toggle('match');
 			toggledCards[1].classList.toggle('match');
-			toggledCards = [];
+			
 			matched++;
+			console.log(matched);
+			toggledCards = [];
+			if(matched === TOTAL_PAIRS) {
+				gameOver();
+			}
 		}else{
 			setTimeout(() => {
+				if(toggledCards.length > 1) {
 				toggleCard(toggledCards[0]);
 				toggleCard(toggledCards[1]);
+				}
 				toggledCards = [];
 		}, 1000);
 	} 	
 }
 
-function isClickValid(clickTarget) {
-	return (
-		clickTarget.classList.contains('card') &&
-		!clickTarget.classList.contains('match') &&
-		toggledCards.length < 2 &&
-		!toggledCards.includes(clickTarget)
-	);
-} 
 
 /*
  * Display the cards on the page
@@ -132,33 +126,28 @@ function checkScore() {
 // Clock 
 function startClock() { 
 	    clockId = setInterval(() => {
-		time++;
 		displayTime();
-		console.log(time);
+		time++;
 		
 	}, 1000);
 }
-startClock();
+
 
 function displayTime() {
 	const clock = document.querySelector('.clock');
-	console.log(clock);
-	clock.innerHTML = time; 
-}
-
-const minutes = Math.floor(time / 60);
-const seconds = time % 60;
-
-if(seconds < 10) {
-	clock.innerHTML = `${minutes}:0${seconds}`;
-}else{
+	const minutes = Math.floor(time / 60);
+	const seconds = time % 60;
+	
+	if(seconds < 10) {
+		clock.innerHTML = `${minutes}:0${seconds}`;
+	}else{
 		clock.innerHTML = `${minutes}:${seconds}`;
+	}
 }
 
 function stopClock() {
 	clearInterval(clockId);
 } 
-stopClock();
 
 // Toggle modal on and off
 function toggleModal() {
@@ -171,15 +160,9 @@ toggleModal(); // Close modal
 
 // Modal Stats
 
-time = 121;
 displayTime();
 moves = 16;
 checkScore();
-
-toggleModal();
-
-writeModalStats();
-toggleModal();
 
 function writeModalStats() {
 	const timeStat = document.querySelector('.modal_time');
@@ -201,7 +184,6 @@ function getStars() {
 			starCount++;
 		}
 	} 
-	console.log(starCount);
 	return starCount;
 }
 
@@ -216,7 +198,15 @@ function resetGame() {
 	resetMoves();
 	resetStars();
 	shuffleDeck();
+	matched = 0;
+	toggledCards = [];
+	
+	for (let i = 0; i<cards.length; i++) {
+    cards[i].classList.remove('open', 'show', 'match');
+    }
 } 
+
+resetGame();
 
 document.querySelector('.restart').addEventListener('click', resetGame);
 document.querySelector('.button_replay').addEventListener('click', resetGame);
